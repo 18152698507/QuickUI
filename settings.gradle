@@ -1,0 +1,3 @@
+include ':QuickUIModule'
+include ':app'
+rootProject.name = "QuickUI"
