@@ -16,6 +16,7 @@ import java.util.List;
 
 import cn.zybwz.quickuimodule.domain.LrcEntity;
 import cn.zybwz.quickuimodule.utils.TextUtils;
+import cn.zybwz.quickuimodule.utils.Utils;
 
 
 public class LrcView extends View {
@@ -23,18 +24,33 @@ public class LrcView extends View {
     private boolean isRun=true;
     private boolean isScroll=false;
     private float historyY=0f;
-//    private MediaPlayer mediaPlayer = getMediaPlayer.getInstance();
     private List<LrcEntity> lrcEntities;
     private int lineIndex,oldLineIndex=0;
     private boolean firstIn=false;
     private boolean seeking=false;
     private long currentTime=0;
+    private Paint paint;
+    private int paintSize=60;
+    private int normalPaintSize=40;
+    private Paint normalPaint;
+    private int canvasWidth,canvasHeight;
     public LrcView(Context context) {
         super(context);
+        init(context);
     }
 
     public LrcView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        init(context);
+    }
+
+    private void init(Context context){
+        paint = new Paint();
+        canvasWidth=getWidth();
+        canvasHeight=getHeight();
+        paintSize= Utils.Companion.dip2px(context,paintSize);
+        normalPaintSize= Utils.Companion.dip2px(context,normalPaintSize);
+        normalPaint = new Paint();
     }
 
     public void setLrcRows(List<LrcEntity> lrcEntities) {
@@ -108,7 +124,6 @@ public class LrcView extends View {
         }
     }
 
-    //@Override
     public void myPostInvalidate(){
         if (lrcEntities!=null)
         if (lineIndex<lrcEntities.size()){
@@ -135,17 +150,13 @@ public class LrcView extends View {
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        Paint paint = new Paint();
-        Paint normalPaint = new Paint();
-        int canvasHeight = canvas.getHeight();
-        int canvasWidth = canvas.getWidth();
         paint.setColor(Color.BLACK);
         normalPaint.setColor(Color.GRAY);
         //写文字
-        paint.setTextSize(60); //以px为单位
-        normalPaint.setTextSize(40);
+        paint.setTextSize(paintSize); //以px为单位
+        normalPaint.setTextSize(normalPaintSize);
         if (lrcEntities==null||lrcEntities.size()==0){
-            canvas.drawText("暂无歌词",(canvasWidth-4*60)/2,100,paint);
+            canvas.drawText("暂无歌词",(float) (canvasWidth-4*paintSize)/2,100,paint);
         }else{
             if (seeking||isScroll){
                 strings.clear();
@@ -169,26 +180,30 @@ public class LrcView extends View {
                     for (int j = 0; j < 7; j++) {
                         int numberCount= TextUtils.numberCount(strings.get(j));
                         if (lineIndex <= 3 && j == lineIndex % 7) {
-                            canvas.drawText(strings.get(j), (canvasWidth - ((strings.get(j).length()-numberCount) * 60)-numberCount*30) / 2, 100 + 100 * j, paint);
+                            canvas.drawText(strings.get(j), getFloatX(j,numberCount,paintSize), 100 + 100 * j, paint);
                         } else if (lineIndex > 3 && j == 3) {
-                            canvas.drawText(strings.get(j), (canvasWidth - ((strings.get(j).length()-numberCount) * 60)-numberCount*30)  / 2, 100 + 100 * j, paint);
+                            canvas.drawText(strings.get(j), getFloatX(j,numberCount,paintSize), 100 + 100 * j, paint);
                         } else
-                            canvas.drawText(strings.get(j), (canvasWidth - ((strings.get(j).length()-numberCount) * 40)-numberCount*20) / 2, 100 + 100 * j, normalPaint);
+                            canvas.drawText(strings.get(j), getFloatX(j,numberCount,normalPaintSize), 100 + 100 * j, normalPaint);
                     }
                 }else {
                     strings.remove(0);
                     for (int j = 0; j < 4+(lrcEntities.size()-lineIndex); j++) {
                         int numberCount=TextUtils.numberCount(strings.get(j));
                         if (lineIndex <= 3 && j == lineIndex % 7) {
-                            canvas.drawText(strings.get(j), (canvasWidth - ((strings.get(j).length()-numberCount) * 60)-numberCount*30) / 2, 100 + 100 * j, paint);
+                            canvas.drawText(strings.get(j), getFloatX(j,numberCount,paintSize), 100 + 100 * j, paint);
                         } else if (lineIndex > 3 && j == 3) {
-                            canvas.drawText(strings.get(j), (canvasWidth - ((strings.get(j).length()-numberCount) * 60)-numberCount*30)  / 2, 100 + 100 * j, paint);
+                            canvas.drawText(strings.get(j), getFloatX(j,numberCount,paintSize), 100 + 100 * j, paint);
                         } else
-                            canvas.drawText(strings.get(j), (canvasWidth - ((strings.get(j).length()-numberCount) * 40)-numberCount*20) / 2, 100 + 100 * j, normalPaint);
+                            canvas.drawText(strings.get(j), getFloatX(j,numberCount,normalPaintSize), 100 + 100 * j, normalPaint);
                     }
                 }
 
         }
+    }
+
+    private float getFloatX(int j,int numberCount,int fontSize){
+        return (float)(canvasWidth - ((strings.get(j).length()-numberCount) * fontSize)-numberCount*fontSize/2) / 2;
     }
 
 }
