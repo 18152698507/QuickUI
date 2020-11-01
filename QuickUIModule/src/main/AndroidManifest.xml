@@ -3,7 +3,11 @@
     package="cn.zybwz.quickuimodule">
 
     <application>
-        <activity android:name=".page.LoginActivity"></activity>
+        <activity android:name=".page.GoodsDetailActivity"></activity>
+        <activity
+            android:name=".page.MainActivityShop"
+            android:label="@string/title_activity_main_shop"></activity>
+        <activity android:name=".page.LoginActivity" />
     </application>
 
 </manifest>
