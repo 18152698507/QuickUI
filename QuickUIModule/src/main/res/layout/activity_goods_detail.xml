@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".page.GoodsDetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.youth.banner.Banner
+                android:id="@+id/activity_banner"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:layout_margin="20dp"
+                android:textSize="16sp"
+                android:text="双11预售【三只松鼠每日坚果750g/30包】孕妇健康零食混合干果"
+                android:maxLines="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:paddingBottom="70dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:background="#fff"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="60dp">
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="40dp">
+            <TextView
+                android:background="@drawable/bg_radius_20"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:text="加入购物车"
+                android:textSize="15sp"
+
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+
+            <TextView
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:text="立即购买"
+                android:background="@drawable/bg_radius_20"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

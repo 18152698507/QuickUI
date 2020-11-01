@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".page.ui.notifications.NotificationsFragment" >
+
+    <cn.zybwz.quickuimodule.widget.TimeLine
+        android:layout_margin="10dp"
+        android:id="@+id/rv_timeline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        app:layout_constraintTop_toBottomOf="@id/rv_timeline"
+        android:gravity="center"
+        android:textSize="36sp"
+        android:text="尾部"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
