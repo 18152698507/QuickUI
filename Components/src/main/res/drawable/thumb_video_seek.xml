@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true" android:state_pressed="false" >
+        <bitmap android:src="@drawable/seekbar_thumb_normal">
+            <size android:width="30dp" android:height="30dp" />
+        </bitmap>
+    </item>
+    <item android:state_focused="true" android:state_pressed="true">
+        <bitmap android:src="@drawable/seekbar_thumb_pressed">
+            <size android:width="30dp" android:height="30dp" />
+        </bitmap>
+    </item>
+    <item android:state_focused="false" android:state_pressed="true">
+        <bitmap android:src="@drawable/seekbar_thumb_pressed">
+            <size android:width="30dp" android:height="30dp" />
+        </bitmap>
+    </item>
+    <item  >
+        <shape android:src="@drawable/seekbar_thumb_normal">
+            <size android:width="10dp" android:height="10dp" />
+        </shape>
+    </item>
+    <!--    <item android:state_pressed="true">-->
+<!--        <shape android:shape="oval">-->
+<!--            <solid android:color="#FF5722" />-->
+<!--            <size android:width="30dp" android:height="30dp" />-->
+<!--        </shape>-->
+<!--    </item>-->
+
+<!--    <item>-->
+<!--        <shape android:shape="oval">-->
+<!--            <solid android:color="#3F51B5" />-->
+<!--            <size android:width="30dp" android:height="30dp" />-->
+<!--        </shape>-->
+<!--    </item>-->
+</selector>
