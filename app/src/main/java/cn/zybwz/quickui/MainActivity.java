@@ -14,6 +14,8 @@ import cn.zybwz.components.net.demo.DemoService;
 import cn.zybwz.components.videoplayer.VideoPlayActivity;
 import cn.zybwz.quickuimodule.base.BaseActivity;
 import cn.zybwz.quickuimodule.page.MainActivityShop;
+import cn.zybwz.quickuimodule.widget.dialog.ConfirmDialog;
+import cn.zybwz.quickuimodule.widget.dialog.TipDialog;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -24,8 +26,24 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Intent intent=new Intent(this, VideoPlayActivity.class);
-        startActivity(intent);
+        ConfirmDialog confirmDialog=new ConfirmDialog(this);
+        confirmDialog.initView(ConfirmDialog.TYPE_CONFIRM,"您确定要删除此文件，删除后无法找回");
+        confirmDialog.show();
+        confirmDialog.setEventListener(new ConfirmDialog.EventListener() {
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onConfirm() {
+                TipDialog tipDialog=new TipDialog(MainActivity.this);
+                tipDialog.initView("您确定要删除此文件，删除后无法找回");
+                tipDialog.show();
+            }
+        });
+//        Intent intent=new Intent(this, VideoPlayActivity.class);
+//        startActivity(intent);
         //init at application
 //        APIService.init("https://jsonplaceholder.typicode.com/");
 //
